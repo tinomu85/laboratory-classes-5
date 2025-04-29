@@ -1,7 +1,8 @@
 class Product {
-  constructor(name, description) {
+  constructor(name, description, price) {
     this.name = name;
     this.description = description;
+    this.price = Number(price);
   }
 
   static #products = [];
@@ -10,8 +11,10 @@ class Product {
     return this.#products;
   }
 
-  static add(product) {
-    this.#products.push(product);
+  static add(productData) {
+    const { name, description, price } = productData;
+    const newProduct = new Product(name, description, price);
+    this.#products.push(newProduct);
   }
 
   static findByName(name) {
@@ -23,10 +26,6 @@ class Product {
   }
 
   static getLast() {
-    if (!this.#products.length) {
-      return;
-    }
-
     return this.#products[this.#products.length - 1];
   }
 }
